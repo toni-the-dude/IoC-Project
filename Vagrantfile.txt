@@ -8,10 +8,8 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y curl
     sudo apt-get install -y software-properties-common
-    # Attempt prevention of "Failed to start session error."
-    sudo apt-get install ubuntu-desktop
 
-    #sudo apt-get install -y xfce4 xfce4-goodies lightdm
+    sudo apt-get install -y xfce4 xfce4-goodies lightdm
 
     #echo "Installing Ansible..."
     #sudo apt-add-repository --yes --update ppa:ansible/ansible
@@ -26,10 +24,6 @@ Vagrant.configure("2") do |config|
     #echo "Running Burp Suite Community setup..."
     #/home/vagrant/burpsuite_community.sh
     #echo "Burp Suite Community installed successfully."
-
-    sudo dpkg-reconfigure -a
-
-    sudo reboot
 
   # Enable the GUI
   config.vm.provider "virtualbox" do |vb|
