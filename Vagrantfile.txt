@@ -1,37 +1,16 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-24.04"
-  config.vm.hostname = "bsuiteauto"
-  config.vm.network :private_network, ip: "172.16.0.10"
+  config.vm.hostname = "basic-gui-vm"
 
-  config.vm.provision "shell", inline: <<-SHELL
-    echo "Started provisioning..."
-    sudo apt-get update
-    sudo apt-get install -y curl
-    sudo apt-get install -y software-properties-common
-
-    sudo apt-get install -y xfce4 xfce4-goodies lightdm
-
-    #echo "Installing Ansible..."
-    #sudo apt-add-repository --yes --update ppa:ansible/ansible
-    #sudo apt-get install -y ansible
-    #echo "Ansible installed."
-
-    #echo "Downloading Burp Suite Community version 2024.6.6 ..."
-    #curl -L -o /home/vagrant/burpsuite_community.sh https://portswigger.net/burp/releases/download?product=community&version=2024.6.6&type=Linux
-    #echo "Burp Suite Community downloaded."
-
-    #chmod +x /home/vagrant/burpsuite_community.sh
-    #echo "Running Burp Suite Community setup..."
-    #/home/vagrant/burpsuite_community.sh
-    #echo "Burp Suite Community installed successfully."
-
-  # Enable the GUI
+  # Enable the GUI mode
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "2048"
+    vb.memory = "1024" # Adjust as needed
   end
 
-  #config.vm.provision "ansible_local" do |ansible|
-  #  ansible.playbook = "playbook.yml"
+  # Provisioning script to install a lightweight GUI
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update
+    sudo apt-get install -y xfce4 xfce4-goodies lightdm
   SHELL
 end
