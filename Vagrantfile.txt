@@ -27,6 +27,8 @@ Vagrant.configure("2") do |config|
     #/home/vagrant/burpsuite_community.sh
     #echo "Burp Suite Community installed successfully."
 
+    sudo reboot
+
   # Enable the GUI
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
