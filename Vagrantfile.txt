@@ -7,4 +7,19 @@ Vagrant.configure("2") do |config|
     vb.gui = true
     vb.memory = "2048" # Increase memory for better performance with GUI
   end
+
+  # Install Ansible during the provisioning phase
+  config.vm.provision "shell", inline: <<-SHELL
+    echo "Updating package list..."
+    sudo apt-get update
+
+    echo "Installing Ansible..."
+    sudo apt-get install -y ansible
+  SHELL
+
+  # Provision using Ansible
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "playbook.yml"
+  end
+
 end
