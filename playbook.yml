@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - curl
+        - wget
+        - default-jre # Java for Burp Suite
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install Burp Suite Community
+      shell: |
+        wget https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux -O /home/vagrant/burpsuite_community.sh
+        chmod +x /home/vagrant/burpsuite_community.sh
+        /home/vagrant/burpsuite_community.sh
