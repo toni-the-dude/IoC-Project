@@ -1,16 +1,9 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/ubuntu-24.04"
-  config.vm.hostname = "basic-gui-vm"
+  config.vm.box = "peru/ubuntu-20.04-desktop-amd64"
+  config.vm.hostname = "desktop-vm"
 
-  # Enable the GUI mode
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "1024" # Adjust as needed
+    vb.memory = "2048" # Increase memory for better performance with GUI
   end
-
-  # Provisioning script to install a lightweight GUI
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get update
-    sudo apt-get install -y xfce4 xfce4-goodies lightdm
-  SHELL
 end
