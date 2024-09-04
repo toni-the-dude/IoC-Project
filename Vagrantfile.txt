@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "peru/ubuntu-20.04-desktop-amd64"
-  config.vm.hostname = "desktop-vm"
+  config.vm.box_version = "20240201.01"
+  config.vm.hostname = "bsuiteauto"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
