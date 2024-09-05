@@ -18,6 +18,6 @@
 
     - name: Install Burp Suite Community
       shell: |
-        wget https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux -O /home/vagrant/burpsuite_community.sh
+        wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
         chmod +x /home/vagrant/burpsuite_community.sh
         /home/vagrant/burpsuite_community.sh
