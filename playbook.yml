@@ -32,11 +32,11 @@
         chmod +x /home/vagrant/burpsuite_community.sh
         /home/vagrant/burpsuite_community.sh
 
-    #- name: Ensure Docker service is started
-    #  service:
-    #    name: docker
-    #    state: started
-    #    enabled: true
+    - name: Ensure Docker service is started
+      service:
+        name: docker
+        state: started
+        enabled: true
 
     - name: Pull OWASP ZAP Docker image
       docker_image:
