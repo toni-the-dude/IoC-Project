@@ -15,9 +15,30 @@
       apt:
         name: docker.io
         state: present
+        update_cache: yes
 
     - name: Install Burp Suite Community
       shell: |
         wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
         chmod +x /home/vagrant/burpsuite_community.sh
         /home/vagrant/burpsuite_community.sh
+
+    - name: Ensure Docker service is started
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Pull OWASP ZAP Docker image
+      docker_image:
+        name: owasp/zap2docker-stable
+        source: pull
+
+    - name: Run OWASP ZAP in headless mode
+      docker_container:
+        name: owasp_zap
+        image: owasp/zap2docker-stable
+        state: started
+        command: zap.sh -daemon -host 0.0.0.0 -port 8080
+        ports:
+          - "8080:8080"
