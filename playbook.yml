@@ -26,12 +26,6 @@
     - name: Refresh group membership for vagrant
       shell: newgrp docker
 
-    - name: Install Burp Suite Community
-      shell: |
-        wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
-        chmod +x /home/vagrant/burpsuite_community.sh
-        /home/vagrant/burpsuite_community.sh
-
     - name: Ensure Docker service is started
       service:
         name: docker
@@ -51,3 +45,9 @@
         command: zap.sh -daemon -host 0.0.0.0 -port 8080
         ports:
           - "8080:8080"
+
+    - name: Install Burp Suite Community
+      shell: |
+        wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
+        chmod +x /home/vagrant/burpsuite_community.sh
+        /home/vagrant/burpsuite_community.sh
