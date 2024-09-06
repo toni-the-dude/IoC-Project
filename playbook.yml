@@ -9,7 +9,7 @@
       loop:
         - curl
         - wget
-        - default-jre # Java for Burp Suite
+        - default-jre
 
     - name: Install Docker
       apt:
@@ -23,24 +23,20 @@
         groups: docker
         append: yes
 
-    - name: Reboot the VM
-      reboot:
-        msg: "Rebooting after Docker installation..."
-        connect_timeout: 60
-        reboot_timeout: 360
-        pre_reboot_delay: 0
-        post_reboot_delay: 30
-      when: ansible_facts['os_family'] == 'Debian'
+    - name: Refresh group membership for vagrant
+      shell: newgrp docker
+
+    - name: Install Burp Suite Community
+      shell: |
+        wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
+        chmod +x /home/vagrant/burpsuite_community.sh
+        /home/vagrant/burpsuite_community.sh
 
     - name: Ensure Docker service is started
       service:
         name: docker
         state: started
         enabled: true
-
-    - name: Install docker module for Ansible
-      pip:
-        name: docker
 
     - name: Pull OWASP ZAP Docker image
       docker_image:
