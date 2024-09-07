@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
   # Ensure OWASP ZAP Docker container starts on every boot
   config.vm.provision "shell", inline: <<-SHELL, run: "always"
     echo "Starting OWASP ZAP Docker container in headless mode with API open to all IPs..."
-    docker run -d --name owasp_zap -p 8080:8080 owasp/zap2docker-stable \
+    docker run -d --name owasp_zap -p 8080:8080 securecodebox/zap \
       zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
   
   SHELL
