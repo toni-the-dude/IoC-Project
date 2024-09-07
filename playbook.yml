@@ -59,12 +59,8 @@
 
     - name: Create Burp Suite startup script
       copy:
-      content: |
-        #!/bin/bash
-        java -jar /home/vagrant/burpsuite_community.jar --project-file=/home/vagrant/burp_downstream.burp
-      dest: /home/vagrant/start_burp.sh
-      mode: '0755'
-
-#    - name: Start Burp Suite
-#      shell: |
-#        nohup /home/vagrant/start_burp.sh &
+        content: |
+          #!/bin/bash
+          java -jar /home/vagrant/burpsuite_community.jar --project-file=/home/vagrant/burp_downstream.burp
+        dest: /home/vagrant/start_burp.sh
+        mode: '0755'
