@@ -34,13 +34,13 @@
 
     - name: Pull OWASP ZAP Docker image
       docker_image:
-        name: owasp/zap2docker-stable
+        name: securecodebox/zap
         source: pull
 
     - name: Run OWASP ZAP in headless mode
       docker_container:
         name: owasp_zap
-        image: owasp/zap2docker-stable
+        image: securecodebox/zap
         state: started
         command: zap.sh -daemon -host 0.0.0.0 -port 8080
         ports:
