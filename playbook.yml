@@ -42,12 +42,30 @@
         name: owasp_zap
         image: securecodebox/zap
         state: started
-        command: zap.sh -daemon --name owasp_zap -u zap -host 0.0.0.0 -port 8080
+        command: zap.sh -daemon --name owasp_zap -u zap -host 0.0.0.0 -port 8081
         ports:
-          - "8080:8080"
+          - "8081:8081"
 
     - name: Install Burp Suite Community
       shell: |
         wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
         chmod +x /home/vagrant/burpsuite_community.sh
         /home/vagrant/burpsuite_community.sh
+
+    - name: Copy pre-configured Burp Suite project file
+      copy:
+        src: C:\Users\anton\Desktop\vagrant\burp_downstream.burp
+        dest: /home/vagrant/burp_downstream.burp
+
+    - name: Create Burp Suite startup script
+      copy:
+      content: |
+        #!/bin/bash
+        java -jar /home/vagrant/burpsuite_community.jar --project-file=/home/vagrant/burp_downstream.burp
+      dest: /home/vagrant/start_burp.sh
+      mode: '0755'
+
+    
+    - name: Start Burp Suite
+      shell: |
+        nohup /home/vagrant/start_burp.sh &

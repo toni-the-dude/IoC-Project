@@ -30,9 +30,11 @@ Vagrant.configure("2") do |config|
     docker rm owasp_zap || true
 
     echo "Starting OWASP ZAP Docker container in headless mode with API open to all IPs..."
-    docker run -d --name owasp_zap -p 8080:8080 securecodebox/zap \
-      zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
+    docker run -d --name owasp_zap -p 8081:8081 securecodebox/zap \
+      zap.sh -daemon -host 0.0.0.0 -port 8081 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
   
+    echo "Starting Burp Suite Community..."
+    nohup /home/vagrant/start_burp.sh &
   SHELL
 
 end
