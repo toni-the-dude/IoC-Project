@@ -51,7 +51,7 @@
       shell: |
         wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
         chmod +x /home/vagrant/burpsuite_community.sh
-        
+
         /usr/bin/expect -c '
         spawn /home/vagrant/burpsuite_community.sh
         expect "OK" { send "o\r" }
@@ -60,7 +60,7 @@
 
     - name: Copy pre-configured Burp Suite project file
       copy:
-        src: C:\Users\anton\Desktop\vagrant\burp_downstream.burp
+        src: burp_downstream.burp
         dest: /home/vagrant/burp_downstream.burp
 
     - name: Create Burp Suite startup script
