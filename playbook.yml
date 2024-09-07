@@ -10,6 +10,7 @@
         - curl
         - wget
         - default-jre
+        - expect
 
     - name: Install Docker
       apt:
@@ -50,7 +51,12 @@
       shell: |
         wget -O /home/vagrant/burpsuite_community.sh "https://portswigger.net/burp/releases/download?product=community&version=2023.7.2&type=Linux"
         chmod +x /home/vagrant/burpsuite_community.sh
-        /home/vagrant/burpsuite_community.sh
+        
+        /usr/bin/expect -c '
+        spawn /home/vagrant/burpsuite_community.sh
+        expect "OK" { send "o\r" }
+        expect eof
+        '
 
     - name: Copy pre-configured Burp Suite project file
       copy:
