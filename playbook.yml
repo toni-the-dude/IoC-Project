@@ -42,7 +42,7 @@
         name: owasp_zap
         image: securecodebox/zap
         state: started
-        command: zap.sh -daemon --name zaproxy -u zap -host 0.0.0.0 -port 8080
+        command: zap.sh -daemon --name owasp_zap -u zap -host 0.0.0.0 -port 8080
         ports:
           - "8080:8080"
 
